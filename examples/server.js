@@ -9,7 +9,7 @@ const webpackHotMiddleware = require('webpack-hot-middleware')
 const WebpackConfig = require('./webpack.config')
 // const path = require('path')
 
-// require('./server2')
+require('./server2')
 
 const app = express()
 const compiler = webpack(WebpackConfig)
@@ -74,7 +74,7 @@ router.post('/base/buffer', function(req, res) {
 
 // registerBaseRouter()
 
-// registerErrorRouter()
+registerErrorRouter()
 
 // registerExtendRouter()
 
@@ -124,26 +124,26 @@ module.exports = app.listen(port, () => {
 //   })
 // }
 
-// function registerErrorRouter () {
-//   router.get('/error/get', function(req, res) {
-//     if (Math.random() > 0.5) {
-//       res.json({
-//         msg: `hello world`
-//       })
-//     } else {
-//       res.status(500)
-//       res.end()
-//     }
-//   })
+function registerErrorRouter () {
+  router.get('/error/get', function(req, res) {
+    if (Math.random() > 0.5) {
+      res.json({
+        msg: `hello world`
+      })
+    } else {
+      res.status(500)
+      res.end()
+    }
+  })
 
-//   router.get('/error/timeout', function(req, res) {
-//     setTimeout(() => {
-//       res.json({
-//         msg: `hello world`
-//       })
-//     }, 3000)
-//   })
-// }
+  router.get('/error/timeout', function(req, res) {
+    setTimeout(() => {
+      res.json({
+        msg: `hello world`
+      })
+    }, 3000)
+  })
+}
 
 // function registerExtendRouter () {
 //   router.get('/extend/get', function(req, res) {

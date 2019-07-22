@@ -1,3 +1,4 @@
+// import axios from '../../src/index'
 import axios, { AxiosError } from '../../src/index'
 
 axios({
