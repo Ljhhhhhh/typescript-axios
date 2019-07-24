@@ -11,7 +11,9 @@ function normalizeHeaderName(headers: any, normalizedName: string): void {
 }
 
 export function processHeaders(headers: any, data: any): any {
+  // 格式化headers内容
   normalizeHeaderName(headers, 'Content-Type')
+  // 如果data是对象，并且不存在Content-Type，强制修改Content-Type为application/json;charset=utf-8
   if (isPlainObject(data)) {
     if (headers && !headers['Content-Type']) {
       headers['Content-Type'] = 'application/json;charset=utf-8'
