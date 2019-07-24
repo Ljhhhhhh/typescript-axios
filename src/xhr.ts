@@ -12,12 +12,14 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       request.responseType = responseType
     }
 
+    // 超时时间
     if (timeout) {
       request.timeout = timeout
     }
 
     request.open(method.toUpperCase(), url, true)
 
+    // 监听状态改变
     request.onreadystatechange = function handleLoad() {
       if (request.readyState !== 4) return
       if (request.status === 0) return
@@ -35,10 +37,12 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       handleResponse(response)
     }
 
+    // 错误处理
     request.onerror = function handleError() {
       reject(createError('Netword Error', config, null, request))
     }
 
+    // 超时处理
     request.ontimeout = function handleTimeout() {
       reject(createError(`Timeout of ${timeout}ms exceeded`, config, 'ECONNABORTED', request))
     }
